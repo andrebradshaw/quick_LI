@@ -471,8 +471,7 @@ showgroups.style.color = "DarkSlateGrey";
 showgroups.style.background = "FloralWhite";
 showgroups.style.border = "DarkCyan";
 showgroups.style.borderRadius = "2em";
-showgroups.style.fontSize = ".75em";
-showgroups.style.transform = "scale(.8)";
+showgroups.style.fontSize = ".9em";
 showgroups.innerText = "show group list";
 showgroups.style.cursor = "pointer";
 function expandG_list(){
@@ -485,10 +484,9 @@ if(showgroups.style.height == "32px"){
   showgroups.style.background = "FloralWhite";
   showgroups.style.border = "DarkCyan";
   showgroups.style.borderRadius = "2em";
-  showgroups.style.fontSize = ".66em";
+  showgroups.style.fontSize = ".76em";
   showgroups.innerText = "show group list";
   showgroups.style.cursor = "pointer";
-  showgroups.style.transform = "scale(.8)";
   showgroups.innerText = listGroups();
 }else{
   showgroups.style.width = "50%";
@@ -498,8 +496,7 @@ if(showgroups.style.height == "32px"){
   showgroups.style.background = "FloralWhite";
   showgroups.style.border = "DarkCyan";
   showgroups.style.borderRadius = "2em";
-  showgroups.style.fontSize = ".75em";
-  showgroups.style.transform = "scale(.8)";
+  showgroups.style.fontSize = ".9em";
   showgroups.innerText = "show group list";
   showgroups.style.cursor = "pointer";
 }
