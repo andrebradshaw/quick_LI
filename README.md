@@ -5,18 +5,29 @@ drop the bookmarklet.txt code into a Chrome Bookmark
 
 Features the basics, plus:
 
+
 Search Geo Radius: 
+
 +uses faceted geocodes
+
 +returns all faceted geocodes within a defined mile radius
--currently only supports USA (I could use help mining the globe)
+
+
 
 Search Faceted Schools:
+
 +groups of schools can be selected with one click
+
 -limited to three categories. (additions by request)
 
+
+
 Search Groups:
+
 +selections from a dropdown. 
+
 +selections include all relevant groups within the search
+
 -only includes selections from what I have mined and coded (additions by request)]
 
 
