@@ -30,6 +30,11 @@ Search Groups:
 
 -only includes selections from what I have mined and coded (additions by request)]
 
+Under Development:
++implicit keyword search by leveraging faceted current and previous employers
+  .We take a list of companies with a known tech stack
+  .search the tech stack
+  .return the faceted-company codes as an sudoarray
 
 
 Available from an old build, but not presently within this code:
