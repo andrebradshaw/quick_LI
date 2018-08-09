@@ -143,46 +143,49 @@ var comms_edu = '["18475","162195","18290","18993","17971","18570","18461","1872
 var biz_edu = '["19329","18153","18943","19921","18043","18994","18803","18495","17940","18291","18634","19233","19541","17951","18315","18484","17927","18947","19605","18840"]';
 var eng_edu = '["18936","18158","18494","19318","17939","18946","19518","18633","17926","18321","18357","17950","19491","19689","18495","18483","18290","19328","18943","10861","19657","10890","13497","13496","13500","17114","18786","17927","10802","19232","19005","18560","17954","13501","10875","13499","18314","17940","12691","17816","12716","18043","12879","18867","12598","19940","12671","17113","10245","10233","17098","17091","19091","11969","11398","10234","18539","15445","11287","18159","12881","19472","12682","10242","19968","12665","11319","17811","13378","18360","11109","10238","14687","12662","12002","11405","11924","12721","15446","14630","12878","10410","13843","10617","12717","11469","11947","17994","10918","14365","14724","15518","11938","12874","10917","12398","14382","11146","10237","11996","17472","16630","13844","14638","19210","12261","10204","15344","14600","14144","19061","17083","20463","21180","17860","14704","21119","21043","15337","15343","14670","11471","14352","14689","156077","162245","151022","43530","224913","379008","14391","180001","3154254","3155240","376016","378008","37937","42229","43259"]';
 
-
-function returnGroupIds(vl){
-  for(i=0; i<groupArr.length; i++){
-    var rxv = new RegExp('\\b'+vl+'\\b', 'gi');
-    if(rxv.test(groupArr[i].v)===true){
-      var outgroup = '["'+ groupArr[i].c.toString().replace(/,/g, '","')+'"]';
+function returnGroupIds(vl) {
+  for (i = 0; i < groupArr.length; i++) {
+    var rxv = new RegExp('\\b' + vl + '\\b', 'gi');
+    if (rxv.test(groupArr[i].v) === true) {
+      var outgroup = '["' + groupArr[i].c.toString().replace(/,/g, '","') + '"]';
     }
   }
   return outgroup;
 }
-function getMatchedGroups(inputval){
+
+function getMatchedGroups(inputval) {
   var rxv = new RegExp(inputval, 'gi');
   var arr = [];
-  for(i=0; i<groupArr.length; i++){
-    if(rxv.test(groupArr[i].v)===true){
+  for (i = 0; i < groupArr.length; i++) {
+    if (rxv.test(groupArr[i].v) === true) {
       var mtchlcl = groupArr[i].v;
       arr.push(mtchlcl)
     }
   }
   return arr;
 }
-function curGroupVal(){
+
+function curGroupVal() {
   var inp = document.getElementById("group_txt").value;
-  if(inp.length >1){
+  if (inp.length > 1) {
     var matches = getMatchedGroups(inp);
-    var ex = new Promise(function(resolve, reject){
+    var ex = new Promise(function(resolve, reject) {
       resolve(clearDivs());
     });
     ex.then(expandGroups(matches));
   }
 }
-function clearDivs(){
+
+function clearDivs() {
   var myNode = document.getElementById("groupCont");
   myNode.innerHTML = '';
 }
-function getMatchedCities(inputval){
+
+function getMatchedCities(inputval) {
   var rxv = new RegExp(inputval, 'gi');
   var arr = [];
-  for(i=0; i<geoLocalArr.length; i++){
-    if(rxv.test(geoLocalArr[i].v)===true){
+  for (i = 0; i < geoLocalArr.length; i++) {
+    if (rxv.test(geoLocalArr[i].v) === true) {
       var mtchlcl = geoLocalArr[i].v;
       arr.push(mtchlcl)
     }
@@ -193,62 +196,67 @@ function getMatchedCities(inputval){
 function dist(lat1, lng1, lat2, lng2) {
   var p = 0.017453292519943295;
   var c = Math.cos;
-  var a = 0.5 - c((lat2 - lat1) * p)/2 +
-          c(lat1 * p) * c(lat2 * p) *
-          (1 - c((lng2 - lng1) * p))/2;
+  var a = 0.5 - c((lat2 - lat1) * p) / 2 +
+    c(lat1 * p) * c(lat2 * p) *
+    (1 - c((lng2 - lng1) * p)) / 2;
   return 0.621371 * (12742 * Math.asin(Math.sqrt(a)));
 }
 
-function getLatLng_one(local){
+function getLatLng_one(local) {
   var arr;
-  for(i=0; i<geoLocalArr.length; i++){
+  for (i = 0; i < geoLocalArr.length; i++) {
     var rxv = new RegExp(local, 'i');
-    if(rxv.test(geoLocalArr[i].v)===true){
+    if (rxv.test(geoLocalArr[i].v) === true) {
       arr = geoLocalArr[i].c;
     }
   }
   return arr;
 }
-function getcodelatlngArr(v){
+
+function getcodelatlngArr(v) {
   var arr = [];
-    for(i=0; i<geoLocalArr.length; i++){
-      var rxv = new RegExp(v, 'gi');
-      if(rxv.test(geoLocalArr[i].v)===true){
-        arr.push(geoLocalArr[i].c);
-      }
+  for (i = 0; i < geoLocalArr.length; i++) {
+    var rxv = new RegExp(v, 'gi');
+    if (rxv.test(geoLocalArr[i].v) === true) {
+      arr.push(geoLocalArr[i].c);
     }
+  }
   return arr;
 }
 
 
-function returnAllMatchesInDistance(vl, miles){
-    for(i=0; i<geoLocalArr.length; i++){
-      var rxv = new RegExp(vl, 'gi');
-      if(rxv.test(geoLocalArr[i].v)===true){
-        var arr = geoLocalArr[i].c;
-      }
+function returnAllMatchesInDistance(vl, miles) {
+  for (i = 0; i < geoLocalArr.length; i++) {
+    var rxv = new RegExp(vl, 'gi');
+    if (rxv.test(geoLocalArr[i].v) === true) {
+      var arr = geoLocalArr[i].c;
     }
+  }
 
   var mi2km = miles;
   var lat_v = arr[1];
-  var lng_v =arr[2];
+  var lng_v = arr[2];
   var codeArr = [arr[0]];
-  for(i=0; i<geoLocalArr.length; i++){
+  for (i = 0; i < geoLocalArr.length; i++) {
     var range = dist(lat_v, lng_v, geoLocalArr[i].c[1], geoLocalArr[i].c[2]);
-    if (range<mi2km){
+    if (range < mi2km) {
       codeArr.push(geoLocalArr[i].c[0]);
     }
   }
-  return '%5B"'+codeArr.toString().replace(/,/g, '"%2C"')+'"%5D';
+  return '%5B"' + codeArr.toString().replace(/,/g, '"%2C"') + '"%5D';
 }
 
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
   } else {
     elmnt.onmousedown = dragMouseDown;
   }
+
   function dragMouseDown(e) {
     e = e || window.event;
     pos3 = e.clientX;
@@ -256,6 +264,7 @@ function dragElement(elmnt) {
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
   }
+
   function elementDrag(e) {
     e = e || window.event;
     pos1 = pos3 - e.clientX;
@@ -268,6 +277,7 @@ function dragElement(elmnt) {
     elmnt.style.background = "DarkSlateGrey";
     elmnt.style.transition = "opacity 1300ms"
   }
+
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
@@ -275,6 +285,7 @@ function dragElement(elmnt) {
     elmnt.style.background = "DarkSlateGrey";
   }
 }
+
 function close() {
   document.body.removeChild(document.getElementById("popup_win"));
 }
@@ -360,7 +371,7 @@ for (ee = 1; ee < 4; ee++) {
   }
   var edu_r = document.createElement("div");
   document.getElementById("popup_win").appendChild(edu_r);
-  edu_r.setAttribute("id", "radio_" +ee);
+  edu_r.setAttribute("id", "radio_" + ee);
 
   edu_r.setAttribute("value", ee);
   edu_r.setAttribute("class", "radiosio");
@@ -375,9 +386,9 @@ for (ee = 1; ee < 4; ee++) {
   edu_r.style.cursor = "pointer";
   edu_r.style.border = "3px";
   edu_r.style.borderColor = "white";
-  document.getElementById("radio_"+ee).addEventListener("mouseover", hoverRadioIn);
-  document.getElementById("radio_"+ee).addEventListener("mouseout", hoverRadioOut);
-  document.getElementById("radio_"+ee).addEventListener("click", radioSelect1);
+  document.getElementById("radio_" + ee).addEventListener("mouseover", hoverRadioIn);
+  document.getElementById("radio_" + ee).addEventListener("mouseout", hoverRadioOut);
+  document.getElementById("radio_" + ee).addEventListener("click", radioSelect1);
 }
 
 for (se = 1; se < 8; se++) {
@@ -403,10 +414,10 @@ for (se = 1; se < 8; se++) {
     case 7:
       nam = "VP";
       break;
-    }
+  }
   var senior = document.createElement("div");
   document.getElementById("popup_win").appendChild(senior);
-  senior.setAttribute("id", "senior_radID_"+se);
+  senior.setAttribute("id", "senior_radID_" + se);
 
   senior.setAttribute("value", se);
   senior.setAttribute("class", "senior_radio");
@@ -421,43 +432,45 @@ for (se = 1; se < 8; se++) {
   senior.style.cursor = "pointer";
   senior.style.border = "3px";
   senior.style.borderColor = "white";
-  document.getElementById("senior_radID_"+se).addEventListener("mouseover", hoverRadioIn);
-  document.getElementById("senior_radID_"+se).addEventListener("mouseout", hoverRadioOut);
-  document.getElementById("senior_radID_"+se).addEventListener("click", radioSelect1);
+  document.getElementById("senior_radID_" + se).addEventListener("mouseover", hoverRadioIn);
+  document.getElementById("senior_radID_" + se).addEventListener("mouseout", hoverRadioOut);
+  document.getElementById("senior_radID_" + se).addEventListener("click", radioSelect1);
 }
 
 
 
 
 
-function hoverRadioOut(){
-  if(this.style.color != "black"){
-  this.style.background = "transparent";
-}else{
-  this.style.background = "DarkCyan";
+function hoverRadioOut() {
+  if (this.style.color != "black") {
+    this.style.background = "transparent";
+  } else {
+    this.style.background = "DarkCyan";
+  }
 }
-}
-function hoverRadioIn(){
+
+function hoverRadioIn() {
   this.style.background = "CadetBlue";
 }
-function radioSelect1(){
-  setTimeout(() =>{
-    if(this.style.color != "black"){
-      if(this.style.background = "CadetBlue"){
-      this.style.borderStyle = "solid";
-      this.style.color = "black";
-      this.style.textAlign = "center";
-      this.style.transition = "border 333ms";
-      this.style.background = "DarkCyan";
+
+function radioSelect1() {
+  setTimeout(() => {
+    if (this.style.color != "black") {
+      if (this.style.background = "CadetBlue") {
+        this.style.borderStyle = "solid";
+        this.style.color = "black";
+        this.style.textAlign = "center";
+        this.style.transition = "border 333ms";
+        this.style.background = "DarkCyan";
       }
-    }else{
+    } else {
       this.style.color = "white";
       this.style.borderStyle = "none";
       this.style.textAlign = "left";
       this.style.transition = "border 333ms";
       this.style.background = "transparent";
     }
-  },81);
+  }, 81);
 }
 
 
@@ -474,38 +487,41 @@ createGroupElm.style.borderRadius = "1em";
 var groupContainer = document.createElement("div");
 document.getElementById("popup_win").appendChild(groupContainer);
 groupContainer.setAttribute("id", "groupCont");
-function expandGroups(arr){
+
+function expandGroups(arr) {
   var cls = document.getElementsByClassName("grps");
   var inp = document.getElementById("group_txt").value;
-    for(g=0; g<arr.length; g++){
-      function hoverE(){
-        this.style.color = "DarkSlateGrey";
-      }
-      function hoverO(){
-        this.style.color = "DarkCyan";
-      }
-      function clickE(){
-        document.getElementById("group_txt").value = this.innerText;
-        this.style.display = "none";
-        clearDivs();
-      }
-      var autoGroup = document.createElement("div");
-      document.getElementById("groupCont").appendChild(autoGroup);
-      autoGroup.setAttribute("class", "grps");
-      autoGroup.setAttribute("id", "grps_"+g);
-      autoGroup.style.width = "85%";
-      autoGroup.style.height = "29px";
-      autoGroup.style.padding = "6px";
-      autoGroup.style.border = "1px solid DarkSlateGrey";
-			autoGroup.style.color = "DarkCyan";
-      autoGroup.style.background = "white";
-      autoGroup.style.borderRadius = "1em";
-      autoGroup.style.cursor = "pointer";
-      document.getElementById("grps_"+g).innerText = arr[g];
-      document.getElementById("grps_"+g).addEventListener("mouseover", hoverE);
-      document.getElementById("grps_"+g).addEventListener("mouseout", hoverO);
-      document.getElementById("grps_"+g).addEventListener("click", clickE);
+  for (g = 0; g < arr.length; g++) {
+    function hoverE() {
+      this.style.color = "DarkSlateGrey";
     }
+
+    function hoverO() {
+      this.style.color = "DarkCyan";
+    }
+
+    function clickE() {
+      document.getElementById("group_txt").value = this.innerText;
+      this.style.display = "none";
+      clearDivs();
+    }
+    var autoGroup = document.createElement("div");
+    document.getElementById("groupCont").appendChild(autoGroup);
+    autoGroup.setAttribute("class", "grps");
+    autoGroup.setAttribute("id", "grps_" + g);
+    autoGroup.style.width = "85%";
+    autoGroup.style.height = "29px";
+    autoGroup.style.padding = "6px";
+    autoGroup.style.border = "1px solid DarkSlateGrey";
+    autoGroup.style.color = "DarkCyan";
+    autoGroup.style.background = "white";
+    autoGroup.style.borderRadius = "1em";
+    autoGroup.style.cursor = "pointer";
+    document.getElementById("grps_" + g).innerText = arr[g];
+    document.getElementById("grps_" + g).addEventListener("mouseover", hoverE);
+    document.getElementById("grps_" + g).addEventListener("mouseout", hoverO);
+    document.getElementById("grps_" + g).addEventListener("click", clickE);
+  }
 }
 
 
@@ -562,133 +578,139 @@ showgroups.style.borderRadius = "2em";
 showgroups.style.fontSize = ".9em";
 showgroups.innerText = "show group list";
 showgroups.style.cursor = "pointer";
-function expandG_list(){
-if(showgroups.style.height == "32px"){
-  showgroups.style.transition = "height 1466ms";
-  showgroups.style.width = "100%";
-  showgroups.style.height = "245px";
-  showgroups.style.padding = "4px";
-  showgroups.style.color = "DarkSlateGrey";
-  showgroups.style.background = "FloralWhite";
-  showgroups.style.border = "DarkCyan";
-  showgroups.style.borderRadius = "2em";
-  showgroups.style.fontSize = ".76em";
-  showgroups.innerText = "show group list";
-  showgroups.style.cursor = "pointer";
-  showgroups.innerText = listGroups();
-}else{
-  showgroups.style.width = "50%";
-  showgroups.style.height = "32px";
-  showgroups.style.padding = "4px";
-  showgroups.style.color = "DarkSlateGrey";
-  showgroups.style.background = "FloralWhite";
-  showgroups.style.border = "DarkCyan";
-  showgroups.style.borderRadius = "2em";
-  showgroups.style.fontSize = ".9em";
-  showgroups.innerText = "show group list";
-  showgroups.style.cursor = "pointer";
-}
+
+function expandG_list() {
+  if (showgroups.style.height == "32px") {
+    showgroups.style.transition = "height 1466ms";
+    showgroups.style.width = "100%";
+    showgroups.style.height = "245px";
+    showgroups.style.padding = "4px";
+    showgroups.style.color = "DarkSlateGrey";
+    showgroups.style.background = "FloralWhite";
+    showgroups.style.border = "DarkCyan";
+    showgroups.style.borderRadius = "2em";
+    showgroups.style.fontSize = ".76em";
+    showgroups.innerText = "show group list";
+    showgroups.style.cursor = "pointer";
+    showgroups.innerText = listGroups();
+  } else {
+    showgroups.style.width = "50%";
+    showgroups.style.height = "32px";
+    showgroups.style.padding = "4px";
+    showgroups.style.color = "DarkSlateGrey";
+    showgroups.style.background = "FloralWhite";
+    showgroups.style.border = "DarkCyan";
+    showgroups.style.borderRadius = "2em";
+    showgroups.style.fontSize = ".9em";
+    showgroups.innerText = "show group list";
+    showgroups.style.cursor = "pointer";
+  }
 
 }
 
-function expandLocals(arr){
+function expandLocals(arr) {
   var cls = document.getElementsByClassName("geos");
   var inp = document.getElementById("local_txt").value;
-    for(g=0; g<arr.length; g++){
-      function hoverE(){
-        this.style.color = "DarkSlateGrey";
-      }
-      function hoverO(){
-        this.style.color = "DarkCyan";
-      }
-      function clickE(){
-        document.getElementById("local_txt").value = this.innerText;
-        this.style.display = "none";
-        clearNullDivs();
-      }
-      var autoGeo = document.createElement("div");
-      document.getElementById("autoCont").appendChild(autoGeo);
-      autoGeo.setAttribute("class", "geos");
-      autoGeo.setAttribute("id", "geo_"+g);
-      autoGeo.style.width = "85%";
-      autoGeo.style.height = "29px";
-      autoGeo.style.padding = "6px";
-      autoGeo.style.border = "1px solid DarkSlateGrey";
-			autoGeo.style.color = "DarkCyan";
-      autoGeo.style.background = "white";
-      autoGeo.style.borderRadius = "1em";
-      autoGeo.style.cursor = "pointer";
-      document.getElementById("geo_"+g).innerText = arr[g];
-      document.getElementById("geo_"+g).addEventListener("mouseover", hoverE);
-      document.getElementById("geo_"+g).addEventListener("mouseout", hoverO);
-      document.getElementById("geo_"+g).addEventListener("click", clickE);
+  for (g = 0; g < arr.length; g++) {
+    function hoverE() {
+      this.style.color = "DarkSlateGrey";
     }
+
+    function hoverO() {
+      this.style.color = "DarkCyan";
+    }
+
+    function clickE() {
+      document.getElementById("local_txt").value = this.innerText;
+      this.style.display = "none";
+      clearNullDivs();
+    }
+    var autoGeo = document.createElement("div");
+    document.getElementById("autoCont").appendChild(autoGeo);
+    autoGeo.setAttribute("class", "geos");
+    autoGeo.setAttribute("id", "geo_" + g);
+    autoGeo.style.width = "85%";
+    autoGeo.style.height = "29px";
+    autoGeo.style.padding = "6px";
+    autoGeo.style.border = "1px solid DarkSlateGrey";
+    autoGeo.style.color = "DarkCyan";
+    autoGeo.style.background = "white";
+    autoGeo.style.borderRadius = "1em";
+    autoGeo.style.cursor = "pointer";
+    document.getElementById("geo_" + g).innerText = arr[g];
+    document.getElementById("geo_" + g).addEventListener("mouseover", hoverE);
+    document.getElementById("geo_" + g).addEventListener("mouseout", hoverO);
+    document.getElementById("geo_" + g).addEventListener("click", clickE);
+  }
 }
-function clearNullDivs(){
+
+function clearNullDivs() {
   var myNode = document.getElementById("autoCont");
   myNode.innerHTML = '';
 }
-function curLocVal(){
+
+function curLocVal() {
   var inp = document.getElementById("local_txt").value;
-  if(inp.length >2){
+  if (inp.length > 2) {
     var matches = getMatchedCities(inp);
-    var ex = new Promise(function(resolve, reject){
+    var ex = new Promise(function(resolve, reject) {
       resolve(clearNullDivs());
     });
     ex.then(expandLocals(matches));
   }
 }
 
-function keyUpExpander_main(){
-  setTimeout(function(){
-  if(document.getElementById("box5").value.length>16 && document.getElementById("box5").value.length <30){
-    createDiv.style.width = "24%";
-    createDiv.style.transition = "width 1666ms";
-    closebtn.style.transition = "transform 1666ms";
-  }
-  if(document.getElementById("box5").value.length>30 && document.getElementById("box5").value.length <45){
-    createDiv.style.width = "27%";
-    createDiv.style.transition = "width 1666ms";
-    closebtn.style.transition = "transform 1666ms";
-  }
-  if(document.getElementById("box5").value.length>45 && document.getElementById("box5").value.length <60){
-    createDiv.style.width = "31%";
-    createDiv.style.transition = "width 1666ms";
-    closebtn.style.transition = "transform 1666ms";
-  }
-  if(document.getElementById("box5").value.length>60 && document.getElementById("box5").value.length <75){
-    createDiv.style.width = "35%";
-    createDiv.style.transition = "width 1666ms";
-    closebtn.style.transition = "transform 1666ms";
-  }
-  if(document.getElementById("box5").value.length>75 && document.getElementById("box5").value.length < 90){
-    createDiv.style.width = "39%";
-    createDiv.style.transition = "width 1666ms";
-    closebtn.style.transition = "transform 1666ms";
-  }
-  if(document.getElementById("box5").value.length>90){
-    createDiv.style.width = "43%";
-    closebtn.style.transform = "scale(2.9, 2.9) rotate(-45deg)";
-    createDiv.style.transition = "width 1666ms";
-    closebtn.style.transition = "transform 1666ms";
-  }
-},63);
+function keyUpExpander_main() {
+  setTimeout(function() {
+    if (document.getElementById("box5").value.length > 16 && document.getElementById("box5").value.length < 30) {
+      createDiv.style.width = "24%";
+      createDiv.style.transition = "width 1666ms";
+      closebtn.style.transition = "transform 1666ms";
+    }
+    if (document.getElementById("box5").value.length > 30 && document.getElementById("box5").value.length < 45) {
+      createDiv.style.width = "27%";
+      createDiv.style.transition = "width 1666ms";
+      closebtn.style.transition = "transform 1666ms";
+    }
+    if (document.getElementById("box5").value.length > 45 && document.getElementById("box5").value.length < 60) {
+      createDiv.style.width = "31%";
+      createDiv.style.transition = "width 1666ms";
+      closebtn.style.transition = "transform 1666ms";
+    }
+    if (document.getElementById("box5").value.length > 60 && document.getElementById("box5").value.length < 75) {
+      createDiv.style.width = "35%";
+      createDiv.style.transition = "width 1666ms";
+      closebtn.style.transition = "transform 1666ms";
+    }
+    if (document.getElementById("box5").value.length > 75 && document.getElementById("box5").value.length < 90) {
+      createDiv.style.width = "39%";
+      createDiv.style.transition = "width 1666ms";
+      closebtn.style.transition = "transform 1666ms";
+    }
+    if (document.getElementById("box5").value.length > 90) {
+      createDiv.style.width = "43%";
+      closebtn.style.transform = "scale(2.9, 2.9) rotate(-45deg)";
+      createDiv.style.transition = "width 1666ms";
+      closebtn.style.transition = "transform 1666ms";
+    }
+  }, 63);
 }
 
-function mouseoutShrink(){
-  setTimeout(function(){
+function mouseoutShrink() {
+  setTimeout(function() {
     createDiv.style.width = "20%";
     closebtn.style.transform = "scale(2.3, 2.3) rotate(0deg)";
     createDiv.style.transition = "width 1033ms";
     closebtn.style.transition = "transform 1033ms";
-},363);
+  }, 363);
 }
-function listGroups(){
-var arr = [];
-	groupArr.forEach(item => {
-		arr.push(item.v);
-	});
-return arr.toString().replace(/,/g, ', ');
+
+function listGroups() {
+  var arr = [];
+  groupArr.forEach(item => {
+    arr.push(item.v);
+  });
+  return arr.toString().replace(/,/g, ', ');
 }
 
 
@@ -702,52 +724,94 @@ document.getElementById("btn_box").addEventListener("click", searchLI);
 dragElement(document.getElementById("popup_win"));
 
 
-function searchLI(){
+function searchLI() {
   var edus = '';
-    var srnty = '';
+  var srnty = '';
   var senioritArr = [];
   var local_val = document.getElementById("local_txt").value;
-  if(document.getElementById("box1").value != ''){var fn = '&firstName='+document.getElementById("box1").value;}else{var fn = '';}
-  if(document.getElementById("box2").value != ''){var ln = '&lastName='+document.getElementById("box2").value;}else{var ln = '';}
-  if(document.getElementById("box3").value != ''){var co = '&company='+document.getElementById("box3").value;}else{var co = '';}
-  if(document.getElementById("box4").value != ''){var tit = '&title='+document.getElementById("box4").value;}else{var tit = '';}
-  if(document.getElementById("box5").value != ''){var kw = document.getElementById("box5").value;}else{var kw = '';}
+  if (document.getElementById("box1").value != '') {
+    var fn = '&firstName=' + document.getElementById("box1").value;
+  } else {
+    var fn = '';
+  }
+  if (document.getElementById("box2").value != '') {
+    var ln = '&lastName=' + document.getElementById("box2").value;
+  } else {
+    var ln = '';
+  }
+  if (document.getElementById("box3").value != '') {
+    var co = '&company=' + document.getElementById("box3").value;
+  } else {
+    var co = '';
+  }
+  if (document.getElementById("box4").value != '') {
+    var tit = '&title=' + document.getElementById("box4").value;
+  } else {
+    var tit = '';
+  }
+  if (document.getElementById("box5").value != '') {
+    var kw = document.getElementById("box5").value;
+  } else {
+    var kw = '';
+  }
   var e_biz = document.getElementById("radio_1").style.borderStyle;
   var e_eng = document.getElementById("radio_2").style.borderStyle;
   var e_com = document.getElementById("radio_3").style.borderStyle;
-  
-    for(srl=1; srl<8; srl++){
-        if(document.getElementById("senior_radID_"+srl).style.borderStyle == 'solid'){
-            senioritArr.push('"'+srl+'"');
-        }   
+
+  for (srl = 1; srl < 8; srl++) {
+    if (document.getElementById("senior_radID_" + srl).style.borderStyle == 'solid') {
+      senioritArr.push('"' + srl + '"');
     }
-    if(senioritArr.length >0){
-       var srnty = '&facetSeniority=['+senioritArr.toString()+']';
-       }
+  }
+  if (senioritArr.length > 0) {
+    var srnty = '&facetSeniority=[' + senioritArr.toString() + ']';
+  }
+  
   var mil = document.getElementById("miles").value;
 
-if(e_biz == "solid"){  var edus = '&facetSchool='+biz_edu; }else if(e_eng == "solid"){ var edus = '&facetSchool='+eng_edu; }else if(e_com == "solid"){  var edus = '&facetSchool='+comms_edu; }else{var edus = '';}
-var locations = '';
-if(document.getElementById("local_txt").value != ''){
-if(miles != ''){
-  var locations = '&facetGeoRegion='+ returnAllMatchesInDistance(local_val, mil);
-}else{
+  if (e_biz == "solid") {
+    var edus = '&facetSchool=' + biz_edu;
+  } else if (e_eng == "solid") {
+    var edus = '&facetSchool=' + eng_edu;
+  } else if (e_com == "solid") {
+    var edus = '&facetSchool=' + comms_edu;
+  } else {
+    var edus = '';
+  }
   var locations = '';
-}
-}else{
-  var locations = '';
-}
+  if (document.getElementById("local_txt").value != '') {
+    if (miles != '') {
+      var locations = '&facetGeoRegion=' + returnAllMatchesInDistance(local_val, mil);
+    } else {
+      var locations = '';
+    }
+  } else {
+    var locations = '';
+  }
 
-if(document.getElementById("group_txt").value != ''){
-  var groupvals = document.getElementById("group_txt").value;
-	if(returnGroupIds(groupvals) != undefined){
-  var groupfacets = '&facetGroup='+ returnGroupIds(groupvals);
-}else{
-	var groupfacets = '';
-}
-}else{
-  var groupfacets = '';
-}
+  if (document.getElementById("group_txt").value != '') {
+    var groupvals = document.getElementById("group_txt").value;
+    if (returnGroupIds(groupvals) != undefined) {
+      var groupfacets = '&facetGroup=' + returnGroupIds(groupvals);
+    } else {
+      var groupfacets = '';
+    }
+  } else {
+    var groupfacets = '';
+  }
+    
+  function checkSr(num) {
+    return parseInt(num.replace(/"/g, '')) < 5;
+  } 
 
-window.open('https://www.linkedin.com/search/results/people/?keywords='+kw+fn+ln+co+tit+locations+groupfacets+edus+srnty);
+  var tested = senioritArr.every(checkSr);
+    
+    if(kw.length >0 && tested === true){
+        var kw = kw + "%20-Director%20-Manager%20-President%20-EVP%20-SVP%20-VP";
+    }
+    if(kw.length <1 && tested === true){
+        var kw = "-Director%20-Manager%20-President%20-EVP%20-SVP%20-VP";
+    }
+  
+  window.open('https://www.linkedin.com/search/results/people/?keywords=' + kw + fn + ln + co + tit + locations + groupfacets + edus + srnty);
 }
