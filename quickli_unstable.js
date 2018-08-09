@@ -370,7 +370,6 @@ for (ee = 1; ee < 4; ee++) {
   edu_r.innerText = named;
   edu_r.style.padding = "6px";
   edu_r.style.color = "white";
-  edu_r.style.display = "block";
   edu_r.style.width = "97%";
   edu_r.style.borderRadius = "2em";
   edu_r.style.cursor = "pointer";
@@ -380,6 +379,57 @@ for (ee = 1; ee < 4; ee++) {
   document.getElementById("radio_"+ee).addEventListener("mouseout", hoverRadioOut);
   document.getElementById("radio_"+ee).addEventListener("click", radioSelect1);
 }
+
+for (se = 1; se < 8; se++) {
+  switch (se) {
+    case 1:
+      nam = "Intern";
+      break;
+    case 2:
+      nam = "Jr Lvl";
+      break;
+    case 3:
+      nam = "Mid Lvl";
+      break;
+    case 4:
+      nam = "Sr Lvl";
+      break;
+    case 5:
+      nam = "Mgr";
+      break;
+    case 6:
+      nam = "Dir";
+      break;
+    case 7:
+      nam = "VP";
+      break;
+    }
+  var senior = document.createElement("div");
+  document.getElementById("popup_win").appendChild(senior);
+  senior.setAttribute("id", "senior_radID_"+se);
+
+  senior.setAttribute("value", se);
+  senior.setAttribute("class", "senior_radio");
+  senior.style.display = "inline-block";
+  senior.style.padding = "6px";
+  senior.style.transform = "translate(3px, 1px)";
+  senior.innerText = nam;
+  senior.style.padding = "6px";
+  senior.style.color = "white";
+  senior.style.width = "30%";
+  senior.style.borderRadius = "2em";
+  senior.style.cursor = "pointer";
+  senior.style.border = "3px";
+  senior.style.borderColor = "white";
+  document.getElementById("senior_radID_"+se).addEventListener("mouseover", hoverRadioIn);
+  document.getElementById("senior_radID_"+se).addEventListener("mouseout", hoverRadioOut);
+  document.getElementById("senior_radID_"+se).addEventListener("click", radioSelect1);
+}
+
+
+
+
+
 function hoverRadioOut(){
   if(this.style.color != "black"){
   this.style.background = "transparent";
@@ -654,6 +704,8 @@ dragElement(document.getElementById("popup_win"));
 
 function searchLI(){
   var edus = '';
+    var srnty = '';
+  var senioritArr = [];
   var local_val = document.getElementById("local_txt").value;
   if(document.getElementById("box1").value != ''){var fn = '&firstName='+document.getElementById("box1").value;}else{var fn = '';}
   if(document.getElementById("box2").value != ''){var ln = '&lastName='+document.getElementById("box2").value;}else{var ln = '';}
@@ -663,6 +715,15 @@ function searchLI(){
   var e_biz = document.getElementById("radio_1").style.borderStyle;
   var e_eng = document.getElementById("radio_2").style.borderStyle;
   var e_com = document.getElementById("radio_3").style.borderStyle;
+  
+    for(srl=1; srl<8; srl++){
+        if(document.getElementById("senior_radID_"+srl).style.borderStyle == 'solid'){
+            senioritArr.push('"'+srl+'"');
+        }   
+    }
+    if(senioritArr.length >0){
+       var srnty = '&facetSeniority=['+senioritArr.toString()+']';
+       }
   var mil = document.getElementById("miles").value;
 
 if(e_biz == "solid"){  var edus = '&facetSchool='+biz_edu; }else if(e_eng == "solid"){ var edus = '&facetSchool='+eng_edu; }else if(e_com == "solid"){  var edus = '&facetSchool='+comms_edu; }else{var edus = '';}
@@ -688,5 +749,5 @@ if(document.getElementById("group_txt").value != ''){
   var groupfacets = '';
 }
 
-window.open('https://www.linkedin.com/search/results/people/?keywords='+kw+fn+ln+co+tit+locations+groupfacets+edus);
+window.open('https://www.linkedin.com/search/results/people/?keywords='+kw+fn+ln+co+tit+locations+groupfacets+edus+srnty);
 }
