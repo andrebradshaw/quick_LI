@@ -318,7 +318,7 @@ closebtn.style.padding = "1px";
 closebtn.style.boxShadow = "1px";
 closebtn.style.border = "1px";
 closebtn.style.userSelect = "none";
-closebtn.style.color = "white";
+closebtn.style.color = "Crimson";
 
 var qckl = document.createElement("div");
 document.getElementById("popup_win").appendChild(qckl);
@@ -436,10 +436,6 @@ for (se = 1; se < 8; se++) {
   document.getElementById("senior_radID_" + se).addEventListener("mouseout", hoverRadioOut);
   document.getElementById("senior_radID_" + se).addEventListener("click", radioSelect1);
 }
-
-
-
-
 
 function hoverRadioOut() {
   if (this.style.color != "black") {
