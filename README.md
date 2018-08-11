@@ -36,10 +36,11 @@ Search Groups:
 
 
 Search Seniority:
+
 +Select from seniority option buttons. 
 
 
-
+_________________________________________________
 Under Development:
 +implicit keyword search by leveraging faceted current and previous employers
   .We take a list of companies with a known tech stack
