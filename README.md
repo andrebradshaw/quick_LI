@@ -33,6 +33,13 @@ Search Groups:
 
 -only includes selections from what I have mined and coded (additions by request)]
 
+
+
+Search Seniority:
++Select from seniority option buttons. 
+
+
+
 Under Development:
 +implicit keyword search by leveraging faceted current and previous employers
   .We take a list of companies with a known tech stack
