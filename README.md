@@ -1,4 +1,7 @@
 # quick_LI
+NOTE: this project will continue to receive updates under the unstable build, but the code is being merged and mirrored with https://github.com/andrebradshaw/Tool-Merge-Project
+
+
 Improved LinkedIn Basic Search from anywhere on your Chrome Browser. Because Chome Extensions are wack.
 
 drop the bookmarklet.txt code into a Chrome Bookmark 
