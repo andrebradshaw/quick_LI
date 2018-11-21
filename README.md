@@ -1,5 +1,8 @@
 # quick_LI
-NOTE: this project will continue to receive updates under the unstable build, but the code is being merged and mirrored with https://github.com/andrebradshaw/Tool-Merge-Project
+NOTE: Group search is broken. facetGroup is no longer supported. This appears to be due to a change in strategy for LinkedIn--moving to events.
+
+this project is also under https://github.com/andrebradshaw/Tool-Merge-Project
+
 
 
 Improved LinkedIn Basic Search from anywhere on your Chrome Browser. Because Chome Extensions are wack.
@@ -25,7 +28,7 @@ Search Faceted Schools:
 
 
 
-Search Groups:
+Search Groups: (BROKEN)
 
 +selections from a dropdown. 
 
@@ -39,18 +42,3 @@ Search Seniority:
 
 +Select from seniority option buttons. 
 
-
-_________________________________________________
-Under Development:
-+implicit keyword search by leveraging faceted current and previous employers
-  .We take a list of companies with a known tech stack
-  .search the tech stack
-  .return the faceted-company codes as an sudoarray
-
-
-Available from an old build, but not presently within this code:
-Search Custom Industries:
-+built on custom curated lists converted into faceted company codes--allowing for
-  &past industry companies
-  &current industry companies
--limited to a few custom company industries like ["Ad Tech", "Real Estate Tech", "Automotive Tech", "Auto Dealer Groups", "Consulting Firms", "Information Security"]
