@@ -1,4 +1,4 @@
-# quick_LI
+# quick_LI - custom LinkedIn Search
 NOTE: Group search is broken. facetGroup is no longer supported. This appears to be due to a change in strategy for LinkedIn--moving to events.
 
 this project is also under https://github.com/andrebradshaw/Tool-Merge-Project
